@@ -1,0 +1,34 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: justinribeiro/lighthouse
+  version:
+    digest: "sha256:f590dace4650f64341962183c23ebe4d3c3d85f4d0ebd75e5a80bc0a75faa2e2"
+
+inputs:
+- name: source
+
+outputs:
+- name: test-results
+
+params:
+  URL:
+  EMAIL:
+  PASSWORD:
+
+run:
+  user: root
+  dir: source
+  path: sh
+  args:
+  - -ec
+  - |-
+    npm ci
+    su chrome --command 'npm run test' > ../test-results/index.html
+
+caches:
+- path: ../../../home/chrome/.cache
+- path: ../../../root/.npm

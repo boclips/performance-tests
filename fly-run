@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+cwd="$(cd "$(dirname "$0")" && pwd)"
+
+EMAIL="$(get-k8s-concourse-secret performance-tests config email)"
+PASSWORD="$(get-k8s-concourse-secret performance-tests config password)"
+URL="$(get-k8s-concourse-secret performance-tests config url)"
+
+export EMAIL
+export PASSWORD
+export URL
+
+fly --target ci \
+    execute \
+    --privileged \
+    --config "$cwd/pipeline/tasks/run.yaml" \
+    --input source="$cwd" \
+    --output test-results=fly-test-results
