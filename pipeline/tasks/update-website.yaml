@@ -1,0 +1,30 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: google/cloud-sdk
+    tag: 272.0.0
+
+inputs:
+- name: document-root
+
+params:
+  GOOGLE_CREDENTIALS:
+
+run:
+  path: bash
+  args:
+  - -ec
+  - |-
+    gcloud auth activate-service-account --key-file=<(echo "$GOOGLE_CREDENTIALS")
+    gsutil \
+      -m \
+      -h "Cache-Control:no-cache,max-age=0" \
+      rsync \
+      -a public-read \
+      -d \
+      -r \
+      ./document-root \
+      ((destination))
