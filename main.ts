@@ -66,10 +66,10 @@ async function main() {
   const result = await lighthouse(url, flags, config);
   await browser.close();
 
-  process.stdout.write(result.report);
+  console.log(result.report);
 }
 
-main().catch((err) => {
-  process.stderr.write(err);
+main().catch((err: Error) => {
+  console.error(err);
   process.exit(1);
 });
