@@ -11,6 +11,14 @@ jobs:
       URL: ((config.url))
       EMAIL: ((config.email))
       PASSWORD: ((config.password))
+  - task: update-website
+    file: source/pipeline/tasks/update-website.yaml
+    params:
+      GOOGLE_CREDENTIALS: ((performance-tests-uploader.google-storage-key))
+    input_mapping:
+      document-root: test-results
+    vars:
+      destination: gs://performance-tests.devboclips.net
 
 resources:
 
