@@ -27,6 +27,7 @@ run:
   - -ec
   - |-
     npm ci
+    npm run lint
     su chrome --command 'npm run test' > ../test-results/index.html
 
 caches:

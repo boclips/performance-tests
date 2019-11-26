@@ -7,12 +7,14 @@
   "author": "Boclips",
   "license": "ISC",
   "scripts": {
+    "lint": "tslint *.ts",
     "test": "ts-node main.ts"
   },
   "devDependencies": {
     "lighthouse": "^5.6.0",
     "puppeteer": "^2.0.0",
     "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   }
 }

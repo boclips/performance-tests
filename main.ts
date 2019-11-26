@@ -1,7 +1,7 @@
-import * as puppeteer from 'puppeteer';
-import * as lighthouse from 'lighthouse';
-import {} from 'lighthouse/types/config';
-import {} from 'lighthouse/types/externs';
+import * as lighthouse from "lighthouse";
+import {} from "lighthouse/types/config";
+import {} from "lighthouse/types/externs";
+import * as puppeteer from "puppeteer";
 
 const email: string = process.env.EMAIL;
 const password: string = process.env.PASSWORD;
@@ -18,7 +18,7 @@ async function login(browser, origin) {
   const passwordInput = await page.$('input[type="password"]');
   await passwordInput.type(password);
   await Promise.all([
-    page.$eval('#kc-form-login', form => form.submit()),
+    page.$eval("#kc-form-login", (form) => form.submit()),
     page.waitForNavigation(),
   ]);
 
@@ -32,7 +32,7 @@ async function logout(browser, origin) {
 }
 
 function isMissing(setting: string) {
-  return typeof setting === 'undefined' || setting === '';
+  return typeof setting === "undefined" || setting === "";
 }
 
 async function main() {
@@ -40,46 +40,46 @@ async function main() {
     || isMissing(password)
     || isMissing(url)
   ) {
-    return Promise.reject('Please set EMAIL, PASSWORD and URL');
+    return Promise.reject("Please set EMAIL, PASSWORD and URL");
   }
   const browser = await puppeteer.launch({
     args: [`--remote-debugging-port=${port}`],
+    defaultViewport: {
+      height: 900,
+      width: 1200,
+    },
     headless: true,
     slowMo: 50,
-    defaultViewport: {
-      width: 1200,
-      height: 900
-    }
   });
 
   await login(browser, url);
 
   const flags: LH.Flags = {
-    output: 'html',
-    port: port
-  }
+    output: "html",
+    port,
+  };
 
   const config: LH.Config.Json = {
-    extends: 'lighthouse:default',
+    extends: "lighthouse:default",
     settings: {
+      emulatedFormFactor: "desktop",
       maxWaitForFcp: 15 * 1000,
       maxWaitForLoad: 35 * 1000,
-      emulatedFormFactor: 'desktop',
       throttling: {
+        cpuSlowdownMultiplier: 1,
         rttMs: 40,
         throughputKbps: 10 * 1024,
-        cpuSlowdownMultiplier: 1,
-      }
+      },
     },
   };
 
   const result = await lighthouse(url, flags, config);
   await browser.close();
 
-  console.log(result.report);
+  process.stdout.write(result.report);
 }
 
-main().catch(err => {
-  console.error(err);
+main().catch((err) => {
+  process.stderr.write(err);
   process.exit(1);
 });
