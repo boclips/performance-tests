@@ -1,0 +1,21 @@
+---
+jobs:
+
+- name: run
+  plan:
+  - get: source
+  - task: run
+    file: source/pipeline/tasks/run.yaml
+    privileged: true
+    params:
+      URL: ((config.url))
+      EMAIL: ((config.email))
+      PASSWORD: ((config.password))
+
+resources:
+
+- name: source
+  type: git
+  icon: github-circle
+  source:
+    uri: https://github.com/boclips/performance-tests.git
