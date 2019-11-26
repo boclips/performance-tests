@@ -1,5 +1,7 @@
 import * as puppeteer from 'puppeteer';
 import * as lighthouse from 'lighthouse';
+import {} from 'lighthouse/types/config';
+import {} from 'lighthouse/types/externs';
 
 const email: string = process.env.EMAIL;
 const password: string = process.env.PASSWORD;
@@ -52,7 +54,12 @@ async function main() {
 
   await login(browser, url);
 
-  const config = {
+  const flags: LH.Flags = {
+    output: 'html',
+    port: port
+  }
+
+  const config: LH.Config.Json = {
     extends: 'lighthouse:default',
     settings: {
       maxWaitForFcp: 15 * 1000,
@@ -64,12 +71,9 @@ async function main() {
         cpuSlowdownMultiplier: 1,
       }
     },
-    disableDeviceEmulation: true,
-    output: 'html',
-    port: port
   };
 
-  const result = await lighthouse(url, config);
+  const result = await lighthouse(url, flags, config);
   await browser.close();
 
   console.log(result.report);
