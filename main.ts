@@ -25,12 +25,6 @@ async function login(browser, origin) {
   await page.close();
 }
 
-async function logout(browser, origin) {
-  const page = await browser.newPage();
-  await page.goto(`${origin}/logout`);
-  await page.close();
-}
-
 function isMissing(setting: string) {
   return typeof setting === "undefined" || setting === "";
 }
@@ -44,10 +38,6 @@ async function main() {
   }
   const browser = await puppeteer.launch({
     args: [`--remote-debugging-port=${port}`],
-    defaultViewport: {
-      height: 900,
-      width: 1200,
-    },
     headless: true,
     slowMo: 50,
   });
