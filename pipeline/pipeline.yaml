@@ -4,6 +4,8 @@ jobs:
 - name: run
   plan:
   - get: source
+  - get: every-hour
+    trigger: true
   - task: run
     file: source/pipeline/tasks/run.yaml
     privileged: true
@@ -27,3 +29,9 @@ resources:
   icon: github-circle
   source:
     uri: https://github.com/boclips/performance-tests.git
+
+- name: every-hour
+  type: time
+  icon: clock-outline
+  source:
+    interval: 1h
