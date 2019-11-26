@@ -10,7 +10,7 @@ jobs:
     file: source/pipeline/tasks/run.yaml
     privileged: true
     params:
-      URL: ((config.url))
+      URL: "https://teachers.boclips.com/videos?page=1&q=mathematics"
       EMAIL: ((config.email))
       PASSWORD: ((config.password))
   - task: update-website
