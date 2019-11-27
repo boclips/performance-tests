@@ -13,6 +13,7 @@ export URL
 fly --target ci \
     execute \
     --privileged \
+    --tag oregon \
     --config "$cwd/pipeline/tasks/run.yaml" \
     --input source="$cwd" \
     --output test-results=fly-test-results
