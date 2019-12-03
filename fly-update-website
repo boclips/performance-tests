@@ -2,7 +2,7 @@
 
 cwd="$(cd "$(dirname "$0")" && pwd)"
 
-GOOGLE_CREDENTIALS="$(get-k8s-concourse-secret performance-tests performance-tests-uploader google-storage-key)" \
+GOOGLE_CREDENTIALS="$(bo show credential concourse-main performance-tests.performance-tests-uploader google-storage-key)" \
 fly --target ci \
     execute \
     --include-ignored \

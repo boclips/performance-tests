@@ -2,8 +2,8 @@
 
 cwd="$(cd "$(dirname "$0")" && pwd)"
 
-EMAIL="$(get-k8s-concourse-secret performance-tests config email)"
-PASSWORD="$(get-k8s-concourse-secret performance-tests config password)"
+EMAIL="$(bo show credential concourse-main performance-tests.config email)"
+PASSWORD="$(bo show credential concourse-main performance-tests.config password)"
 URL="https://teachers.boclips.com/videos?page=1&q=mathematics"
 
 export EMAIL
