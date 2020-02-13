@@ -7,20 +7,12 @@ jobs:
   - get: every-hour
     trigger: true
   - task: run
-    file: source/pipeline/tasks/run.yaml
+    file: source/pipeline/tasks/lighthouse-ci.yaml
     privileged: true
     params:
       URL: "https://teachers.boclips.com/videos?page=1&q=mathematics"
       EMAIL: ((config.email))
       PASSWORD: ((config.password))
-  - task: update-website
-    file: source/pipeline/tasks/update-website.yaml
-    params:
-      GOOGLE_CREDENTIALS: ((performance-tests-uploader.google-storage-key))
-    input_mapping:
-      document-root: test-results
-    vars:
-      destination: gs://performance-tests.devboclips.net
 
 resources:
 
@@ -28,6 +20,7 @@ resources:
   type: git
   icon: github-circle
   source:
+    branch: lighthouse-ci
     uri: https://github.com/boclips/performance-tests.git
 
 - name: every-hour
