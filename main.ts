@@ -1,6 +1,3 @@
-import * as lighthouse from "lighthouse";
-import {} from "lighthouse/types/config";
-import {} from "lighthouse/types/externs";
 import * as puppeteer from "puppeteer";
 
 const email: string = process.env.EMAIL;
@@ -8,9 +5,9 @@ const password: string = process.env.PASSWORD;
 const url: string = process.env.URL;
 const port = 8675;
 
-async function login(browser, origin) {
+module.exports = async (browser) => {
   const page = await browser.newPage();
-  await page.goto(origin);
+  await page.goto(url);
   await page.waitForSelector('input[type="email"]', {visible: true});
 
   const emailInput = await page.$('input[type="email"]');
@@ -23,53 +20,4 @@ async function login(browser, origin) {
   ]);
 
   await page.close();
-}
-
-function isMissing(setting: string) {
-  return typeof setting === "undefined" || setting === "";
-}
-
-async function main() {
-  if ( isMissing(email)
-    || isMissing(password)
-    || isMissing(url)
-  ) {
-    return Promise.reject("Please set EMAIL, PASSWORD and URL");
-  }
-  const browser = await puppeteer.launch({
-    args: [`--remote-debugging-port=${port}`],
-    headless: true,
-    slowMo: 50,
-  });
-
-  await login(browser, url);
-
-  const flags: LH.Flags = {
-    output: "html",
-    port,
-  };
-
-  const config: LH.Config.Json = {
-    extends: "lighthouse:default",
-    settings: {
-      emulatedFormFactor: "desktop",
-      maxWaitForFcp: 15 * 1000,
-      maxWaitForLoad: 35 * 1000,
-      throttling: {
-        cpuSlowdownMultiplier: 1,
-        rttMs: 40,
-        throughputKbps: 10 * 1024,
-      },
-    },
-  };
-
-  const result = await lighthouse(url, flags, config);
-  await browser.close();
-
-  console.log(result.report);
-}
-
-main().catch((err: Error) => {
-  console.error(err);
-  process.exit(1);
-});
+};

@@ -1,0 +1,37 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: cypress/browsers
+    tag: node10.16.0-chrome77
+
+inputs:
+- name: source
+
+params:
+  URL:
+  EMAIL:
+  PASSWORD:
+
+run:
+  user: root
+  dir: source
+  path: sh
+  args:
+  - -ec
+  - |-
+    npm ci
+    npm run lint
+    npx tsc ./main.ts
+    mkdir .lighthouseci
+    chown node:node .lighthouseci
+    su node --command \
+    "npx lhci collect --url=\"$URL\" --puppeteer-script=main.js"
+    su node --command \
+    "npx lhci upload --target=temporary-public-storage"
+
+caches:
+- path: ../../../home/chrome/.cache
+- path: ../../../root/.npm
