@@ -11,4 +11,4 @@ ci:
         rttMs: 40
         throughputKbps: 10240
   upload:
-    target: temporary-public-storage
+    serverBaseUrl: https://performance-tests.devboclips.net

@@ -9,19 +9,23 @@ image_resource:
 
 inputs:
 - name: source
+- name: release-manifests
 
 params:
   URL:
   EMAIL:
   PASSWORD:
+  LHCI_TOKEN:
 
 run:
   user: root
-  dir: source
   path: sh
   args:
   - -ec
   - |-
+    current_hash="$(git -C release-manifests rev-list --no-merges -n1 HEAD)"
+    (
+    cd source
     npm ci
     npm run lint
     npx tsc ./main.ts
@@ -31,6 +35,7 @@ run:
     "npx lhci collect"
     su node --command \
     "npx lhci upload"
+    )
 
 caches:
 - path: ../../../home/chrome/.cache
