@@ -1,0 +1,14 @@
+ci:
+  collect:
+    url: https://teachers.boclips.com/videos?page=1&q=mathematics
+    puppeteerScript: main.js
+    settings:
+      emulatedFormFactor: desktop
+      maxWaitForFcp: 15000
+      maxWaitForLoad: 35000
+      throttling:
+        cpuSlowdownMultiplier: 1
+        rttMs: 40
+        throughputKbps: 10240
+  upload:
+    target: temporary-public-storage

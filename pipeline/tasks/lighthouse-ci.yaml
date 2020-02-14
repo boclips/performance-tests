@@ -28,9 +28,9 @@ run:
     mkdir .lighthouseci
     chown node:node .lighthouseci
     su node --command \
-    "npx lhci collect --url=\"$URL\" --puppeteer-script=main.js"
+    "npx lhci collect"
     su node --command \
-    "npx lhci upload --target=temporary-public-storage"
+    "npx lhci upload"
 
 caches:
 - path: ../../../home/chrome/.cache

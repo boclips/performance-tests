@@ -10,7 +10,9 @@ jobs:
     file: source/pipeline/tasks/lighthouse-ci.yaml
     privileged: true
     params:
-      URL: "https://teachers.boclips.com/videos?page=1&q=mathematics"
+      # This gets us to the login. See lighthouserc.yaml for URL the test is
+      # run against.
+      URL: "https://teachers.boclips.com/"
       EMAIL: ((config.email))
       PASSWORD: ((config.password))
 
