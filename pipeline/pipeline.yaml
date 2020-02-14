@@ -22,7 +22,6 @@ resources:
   type: git
   icon: github-circle
   source:
-    branch: lighthouse-ci
     uri: https://github.com/boclips/performance-tests.git
 
 - name: every-hour
