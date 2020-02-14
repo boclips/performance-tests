@@ -24,7 +24,9 @@ run:
   - -ec
   - |-
     LHCI_BUILD_CONTEXT__CURRENT_HASH="$(git -C release-manifests rev-list --no-merges -n1 HEAD)"
+    LHCI_BUILD_CONTEXT__CURRENT_BRANCH=master
     export LHCI_BUILD_CONTEXT__CURRENT_HASH
+    export LHCI_BUILD_CONTEXT__CURRENT_BRANCH
     (
     cd source
     npm ci
