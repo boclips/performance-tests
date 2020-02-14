@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lhci-server
+spec:
+  template:
+    spec:
+      volumes: []
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: lhci-server
+        image: app:0
+        ports:
+        - name: http
+          containerPort: 9001
+        volumeMounts: []
