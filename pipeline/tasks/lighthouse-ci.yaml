@@ -23,7 +23,8 @@ run:
   args:
   - -ec
   - |-
-    current_hash="$(git -C release-manifests rev-list --no-merges -n1 HEAD)"
+    LHCI_BUILD_CONTEXT__CURRENT_HASH="$(git -C release-manifests rev-list --no-merges -n1 HEAD)"
+    export LHCI_BUILD_CONTEXT__CURRENT_HASH
     (
     cd source
     npm ci
