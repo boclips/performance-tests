@@ -26,9 +26,11 @@ run:
     LHCI_BUILD_CONTEXT__CURRENT_HASH="$(git -C release-manifests rev-list --no-merges -n1 HEAD)"
     LHCI_BUILD_CONTEXT__CURRENT_BRANCH=master
     LHCI_BUILD_CONTEXT__COMMIT_MESSAGE="$(git -C release-manifests log --format=%s -n1 HEAD)"
+    LHCI_BUILD_CONTEXT__AUTHOR="Boclips <engineering@boclips.com>"
     export LHCI_BUILD_CONTEXT__CURRENT_HASH
     export LHCI_BUILD_CONTEXT__CURRENT_BRANCH
     export LHCI_BUILD_CONTEXT__COMMIT_MESSAGE
+    export LHCI_BUILD_CONTEXT__AUTHOR
     (
     cd source
     npm ci
