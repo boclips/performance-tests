@@ -1,8 +1,9 @@
+kind: StatefulSet
 apiVersion: apps/v1
-kind: Deployment
 metadata:
   name: lhci-server
 spec:
+  serviceName: lhci-server
   template:
     spec:
       volumes: []
