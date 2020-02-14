@@ -27,10 +27,14 @@ run:
     LHCI_BUILD_CONTEXT__CURRENT_BRANCH=master
     LHCI_BUILD_CONTEXT__COMMIT_MESSAGE="$(git -C release-manifests log --format=%s -n1 HEAD)"
     LHCI_BUILD_CONTEXT__AUTHOR="Boclips <engineering@boclips.com>"
+    LHCI_BUILD_CONTEXT__AVATAR_URL="https://avatars2.githubusercontent.com/u/12545638?s=200&v=4"
+    LHCI_BUILD_CONTEXT__COMMIT_TIME="$(git -C release-manifests log -n1 --pretty=%cI HEAD)"
     export LHCI_BUILD_CONTEXT__CURRENT_HASH
     export LHCI_BUILD_CONTEXT__CURRENT_BRANCH
     export LHCI_BUILD_CONTEXT__COMMIT_MESSAGE
     export LHCI_BUILD_CONTEXT__AUTHOR
+    export LHCI_BUILD_CONTEXT__AVATAR_URL
+    export LHCI_BUILD_CONTEXT__COMMIT_TIME
     (
     cd source
     npm ci
