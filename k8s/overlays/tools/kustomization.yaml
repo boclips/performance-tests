@@ -15,5 +15,5 @@ patches:
 - path: noncritical.yaml
   target:
     group: apps
-    kind: Deployment
+    kind: StatefulSet
     version: v1
