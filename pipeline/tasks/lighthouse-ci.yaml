@@ -12,7 +12,8 @@ inputs:
 - name: release-manifests
 
 params:
-  URL:
+  ACHIEVE_LOGIN_URL:
+  TEST_URL:
   EMAIL:
   PASSWORD:
   LHCI_TOKEN:
@@ -43,7 +44,7 @@ run:
     mkdir .lighthouseci
     chown node:node .lighthouseci
     su node --command \
-    "npx lhci collect"
+    "npx lhci collect --url=$TEST_URL"
     su node --command \
     "npx lhci upload"
     )

@@ -2,7 +2,7 @@ import * as puppeteer from "puppeteer";
 
 const email: string = process.env.EMAIL;
 const password: string = process.env.PASSWORD;
-const url: string = process.env.URL;
+const url: string = process.env.ACHIEVE_LOGIN_URL;
 const port = 8675;
 
 module.exports = async (browser) => {
