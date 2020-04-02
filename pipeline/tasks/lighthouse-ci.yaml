@@ -44,7 +44,7 @@ run:
     mkdir .lighthouseci
     chown node:node .lighthouseci
     su node --command \
-    "npx lhci collect --url=$TEST_URL"
+    "npx lhci collect '--url=$TEST_URL'"
     su node --command \
     "npx lhci upload"
     )
