@@ -51,4 +51,5 @@ run:
 
 caches:
 - path: ../../../home/chrome/.cache
+- path: ../../../opt/google/chrome
 - path: ../../../root/.npm
