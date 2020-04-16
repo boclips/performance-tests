@@ -51,5 +51,5 @@ run:
 
 caches:
 - path: ../../../home/chrome/.cache
-- path: ../../../opt/google/chrome
+- path: source/node_modules/puppeteer/.local-chromium
 - path: ../../../root/.npm
