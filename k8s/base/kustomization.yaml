@@ -10,7 +10,7 @@ commonLabels:
 images:
 - name: app
   newName: patrickhulce/lhci-server
-  newTag: 0.3.13
+  newTag: 0.3.14
 patches:
 - path: scale.yaml
   target:
