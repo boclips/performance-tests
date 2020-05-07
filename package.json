@@ -12,7 +12,7 @@
   "dependencies": {
     "@lhci/cli": "^0.3.14",
     "lighthouse": "^5.6.0",
-    "puppeteer": "^3.0.2",
+    "puppeteer-core": "^3.0.3",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   }
