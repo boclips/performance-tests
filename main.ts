@@ -6,7 +6,7 @@ const url: string = process.env.ACHIEVE_LOGIN_URL;
 const port = 8675;
 
 module.exports = async (browser) => {
-  if (url === "") {
+  if (!url || url === "") {
     return browser;
   }
   const page = await browser.newPage();
