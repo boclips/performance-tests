@@ -10,8 +10,8 @@
     "lint": "tslint *.ts"
   },
   "dependencies": {
-    "@lhci/cli": "^0.3.14",
-    "lighthouse": "^5.6.0",
+    "@lhci/cli": "^0.4.1",
+    "lighthouse": "^6.0.0",
     "puppeteer": "^3.0.3",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
