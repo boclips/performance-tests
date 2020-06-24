@@ -17,7 +17,6 @@ params:
   EMAIL:
   PASSWORD:
   LHCI_TOKEN:
-  PUPPETEER_SKIP_DOWNLOAD: 1
 
 run:
   user: root
