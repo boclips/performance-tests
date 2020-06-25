@@ -5,7 +5,7 @@ image_resource:
   type: registry-image
   source:
     repository: cypress/browsers
-    tag: node10.16.0-chrome77
+    tag: node12.14.1-chrome83-ff77
 
 inputs:
 - name: source
@@ -17,6 +17,7 @@ params:
   EMAIL:
   PASSWORD:
   LHCI_TOKEN:
+  PUPPETEER_SKIP_DOWNLOAD: 1
 
 run:
   user: root
