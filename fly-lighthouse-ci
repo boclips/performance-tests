@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+cwd="$(cd "$(dirname "$0")" && pwd)"
+
+# copy source dir away, so we can remove its node_modules. We want to
+# --include-ignored for the git dir, but don't want node_modules, which are
+# massive
+rm -rf /tmp/perf-tests
+cp -a "$cwd" /tmp/perf-tests
+rm -rf /tmp/perf-tests/node_modules
+
+TEST_URL=https://teachers.boclips.com \
+LHCI_TOKEN="$(bo show credential concourse-main boclips.performance-tests token-teachers-login-london)" \
+fly \
+    --target ci \
+    execute \
+    --privileged \
+    --include-ignored \
+    --config "$cwd/pipeline/tasks/lighthouse-ci.yaml" \
+    --input source="/tmp/perf-tests" \
+    --input release-manifests="$cwd/../release-manifests"
